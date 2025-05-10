@@ -6,35 +6,72 @@ import io
 st.set_page_config(page_title="Backtranslation Rating - Rater 07", layout="centered")
 st.title("📝 Simplification Back-Translation Evaluation - Rater 07")
 
-# 📘 展开评分标准
-with st.expander("📘 Click here to view the Rating Guidelines"):
+    
+with st.expander("📘 View Manual Scoring Guidelines"):
     st.markdown("""
-### 🎯 **Scoring Guidelines (1–5 scale)**
+### 🎯 **Manual Scoring Protocol (1–5 Scale)**
 
-#### 1️⃣ Meaning (compared to the original sentence)  
-- **5:** All key information kept, meaning unchanged  
-- **3:** Some loss or minor distortion  
-- **1:** Meaning totally changed or missing  
-🛑 _Watch out for:_ Omitted facts, Added content, Entity mix-ups  
+This study introduces a human evaluation protocol for **multilingual sentence simplification (Chinese/German)**. Ratings are based on:
 
-#### 2️⃣ Fluency (grammar & expression only)  
-- **5:** Fully natural and grammatically correct  
-- **3:** Understandable but awkward  
-- **1:** Hard to read or broken grammar  
-🛑 _Watch out for:_ Word order issues, Punctuation, Verb forms  
+#### 1️⃣ **Meaning Preservation** (vs. original complex sentence)
+> Does the simplification maintain the original meaning without adding, omitting, or distorting key content?
 
-#### 3️⃣ Simplicity (compared to the original sentence)  
-- **5:** Much easier to read, clearly simplified  
-- **3:** Slightly easier or similar  
-- **1:** Still complex or made worse  
-🛑 _Watch out for:_ Long/complex structure, Redundant phrasing  
+| Score | Description |
+|---|---|
+| **5** | Fully preserves meaning; no key info lost or altered |
+| **4** | Minor shifts in meaning; core preserved |
+| **3** | Partial meaning loss or distortion |
+| **2** | Major omissions or misunderstandings |
+| **1** | Contradicts or misses original intent |
 
-#### 4️⃣ Diversity (optional, if multiple refs exist)  
-- **5:** Very different in style or structure  
-- **3:** Some variation  
-- **1:** Almost identical to others  
-📌 _This measures **variation**, not correctness._  
-""")
+🛑 _Common issues:_ addition, omission, entity confusion
+
+---
+
+#### 2️⃣ **Fluency** (language quality alone)
+> Is the simplified sentence grammatically correct and natural?
+
+| Score | Description |
+|---|---|
+| **5** | Fluent, native-like |
+| **4** | Minor errors, easy to understand |
+| **3** | Readable with noticeable issues |
+| **2** | Hard to follow due to grammar |
+| **1** | Unintelligible or broken syntax |
+
+🛑 _Common issues:_ punctuation, verb forms, word order
+
+---
+
+#### 3️⃣ **Simplicity** (vs. original sentence)
+> Has complexity been reduced structurally or lexically?
+
+| Score | Description |
+|---|---|
+| **5** | Clearly easier to read, much simpler |
+| **4** | Noticeably simpler |
+| **3** | Slight improvement or same |
+| **2** | Minimal simplification |
+| **1** | Still complex or even harder |
+
+💡 _Don’t confuse info loss (penalized under Meaning) with valid simplification._
+
+---
+
+#### 4️⃣ **Diversity** (vs. other references)
+> Is the expression/style clearly different from other simplifications?
+
+| Score | Description |
+|---|---|
+| **5** | Creative or unique structure/style |
+| **4** | Distinct phrasing or tone |
+| **3** | Some variation |
+| **2** | Very similar wording |
+| **1** | Nearly identical |
+
+🔎 _Diversity ≠ quality. Use only when multiple references exist._
+    """)
+
 
 # 读取 CSV 文件
 df = pd.read_csv("bt_batch_07.csv", encoding="utf-8-sig")
