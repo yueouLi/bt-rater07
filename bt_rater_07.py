@@ -1,6 +1,6 @@
-
 import streamlit as st
 import pandas as pd
+import io
 
 df = pd.read_csv("bt_batch_07.csv", encoding="utf-8-sig")
 
@@ -44,7 +44,19 @@ for idx, row in df.iterrows():
         "c_diversity": c_diversity,
     })
 
+# 分隔线
 st.markdown("---")
-if st.button("💾 Export Ratings to CSV"):
-    pd.DataFrame(ratings).to_csv(f"bt_ratings_rater07.csv", index=False, encoding="utf-8-sig")
-    st.success("✅ Ratings saved successfully.")
+
+# 如果有评分数据，显示下载按钮
+if ratings:
+    ratings_df = pd.DataFrame(ratings)
+    csv_buffer = io.StringIO()
+    ratings_df.to_csv(csv_buffer, index=False, encoding="utf-8-sig")
+    csv_data = csv_buffer.getvalue()
+
+    st.download_button(
+        label="⬇️ Download Ratings as CSV",
+        data=csv_data,
+        file_name=f"bt_ratings_{rater_id}.csv",
+        mime="text/csv"
+    )
