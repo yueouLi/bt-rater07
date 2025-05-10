@@ -93,17 +93,19 @@ for idx in range(start_idx, end_idx):
     row = df.iloc[idx]
     st.markdown(f"### 🔢 Sample {idx + 1}")
     st.markdown(f"**🟩 Source:**  \n{row['source']}")
-    st.markdown(f"**🇩🇪 German Back-Translation:**  \n{row['bt_de']}")
-    st.markdown(f"**🇨🇳 Chinese Back-Translation:**  \n{row['bt_zh']}")
+    st.markdown(f"**🦁Sprache 1 Back-Translation:**  \n{row['bt_de']}")
+   
 
-    g_meaning = st.slider(f"Meaning (German) [{idx}]", 1, 5, 3, key=f"gm{idx}")
-    g_fluency = st.slider(f"Fluency (German) [{idx}]", 1, 5, 3, key=f"gf{idx}")
-    g_simplicity = st.slider(f"Simplicity (German) [{idx}]", 1, 5, 3, key=f"gs{idx}")
-    g_diversity = st.slider(f"Diversity (German) [{idx}]", 1, 5, 3, key=f"gd{idx}")
-    c_meaning = st.slider(f"Meaning (Chinese) [{idx}]", 1, 5, 3, key=f"cm{idx}")
-    c_fluency = st.slider(f"Fluency (Chinese) [{idx}]", 1, 5, 3, key=f"cf{idx}")
-    c_simplicity = st.slider(f"Simplicity (Chinese) [{idx}]", 1, 5, 3, key=f"cs{idx}")
-    c_diversity = st.slider(f"Diversity (Chinese) [{idx}]", 1, 5, 3, key=f"cd{idx}")
+    g_meaning = st.slider(f"Meaning (🦁) [{idx}]", 1, 5, 3, key=f"gm{idx}")
+    g_fluency = st.slider(f"Fluency (🦁) [{idx}]", 1, 5, 3, key=f"gf{idx}")
+    g_simplicity = st.slider(f"Simplicity (🦁) [{idx}]", 1, 5, 3, key=f"gs{idx}")
+    g_diversity = st.slider(f"Diversity (🦁) [{idx}]", 1, 5, 3, key=f"gd{idx}")
+    
+    st.markdown(f"**🐮Sprache 2 Back-Translation:**  \n{row['bt_zh']}")
+    c_meaning = st.slider(f"Meaning (🐮) [{idx}]", 1, 5, 3, key=f"cm{idx}")
+    c_fluency = st.slider(f"Fluency (🐮) [{idx}]", 1, 5, 3, key=f"cf{idx}")
+    c_simplicity = st.slider(f"Simplicity (🐮) [{idx}]", 1, 5, 3, key=f"cs{idx}")
+    c_diversity = st.slider(f"Diversity (🐮) [{idx}]", 1, 5, 3, key=f"cd{idx}")
 
     st.session_state.ratings_data[idx] = {
         "rater_id": rater_id,
