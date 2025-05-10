@@ -101,6 +101,7 @@ for idx in range(start_idx, end_idx):
     g_simplicity = st.slider(f"Simplicity (🦁) [{idx}]", 1, 5, 3, key=f"gs{idx}")
     g_diversity = st.slider(f"Diversity (🦁) [{idx}]", 1, 5, 3, key=f"gd{idx}")
     
+    st.markdown(f"**🟩 Source:**  \n{row['source']}")
     st.markdown(f"**🐮Sprache 2 Back-Translation:**  \n{row['bt_zh']}")
     c_meaning = st.slider(f"Meaning (🐮) [{idx}]", 1, 5, 3, key=f"cm{idx}")
     c_fluency = st.slider(f"Fluency (🐮) [{idx}]", 1, 5, 3, key=f"cf{idx}")
