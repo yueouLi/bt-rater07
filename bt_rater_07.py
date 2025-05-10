@@ -2,16 +2,55 @@ import streamlit as st
 import pandas as pd
 import io
 
-df = pd.read_csv("bt_batch_07.csv", encoding="utf-8-sig")
-
+# 设置页面标题和布局
 st.set_page_config(page_title="Backtranslation Rating - Rater 07", layout="centered")
 st.title("📝 Simplification Back-Translation Evaluation - Rater 07")
+
+# 📘 展开评分标准
+with st.expander("📘 Click here to view the Rating Guidelines"):
+    st.markdown("""
+### 🎯 **Scoring Guidelines (1–5 scale)**
+
+#### 1️⃣ Meaning (compared to the original sentence)  
+- **5:** All key information kept, meaning unchanged  
+- **3:** Some loss or minor distortion  
+- **1:** Meaning totally changed or missing  
+🛑 _Watch out for:_ Omitted facts, Added content, Entity mix-ups  
+
+---
+
+#### 2️⃣ Fluency (grammar & expression only)  
+- **5:** Fully natural and grammatically correct  
+- **3:** Understandable but awkward  
+- **1:** Hard to read or broken grammar  
+🛑 _Watch out for:_ Word order issues, Punctuation, Verb forms  
+
+---
+
+#### 3️⃣ Simplicity (compared to the original sentence)  
+- **5:** Much easier to read, clearly simplified  
+- **3:** Slightly easier or similar  
+- **1:** Still complex or made worse  
+🛑 _Watch out for:_ Long/complex structure, Redundant phrasing  
+
+---
+
+#### 4️⃣ Diversity (optional, if multiple refs exist)  
+- **5:** Very different in style or structure  
+- **3:** Some variation  
+- **1:** Almost identical to others  
+📌 _This measures **variation**, not correctness._  
+    """)
+
+# 读取 CSV 文件
+df = pd.read_csv("bt_batch_07.csv", encoding="utf-8-sig")
 
 rater_id = "rater07"
 ratings = []
 
+# 展示每一条数据并采集评分
 for idx, row in df.iterrows():
-    st.markdown(f"### 🔢 Sample {idx+1}")
+    st.markdown(f"### 🔢 Sample {idx + 1}")
     st.markdown(f"**🟩 Source:**  \n{row['source']}")
     st.markdown(f"**🇩🇪 German Back-Translation:**  \n{row['bt_de']}")
     st.markdown(f"**🇨🇳 Chinese Back-Translation:**  \n{row['bt_zh']}")
@@ -44,10 +83,8 @@ for idx, row in df.iterrows():
         "c_diversity": c_diversity,
     })
 
-# 分隔线
+# 下载按钮
 st.markdown("---")
-
-# 如果有评分数据，显示下载按钮
 if ratings:
     ratings_df = pd.DataFrame(ratings)
     csv_buffer = io.StringIO()
